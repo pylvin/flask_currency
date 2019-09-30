@@ -1,0 +1,11 @@
+
+
+CREATE TABLE todos (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  text VARCHAR(255),
+  create_time TIMESTAMP DEFAULT NOW()
+);
+--
+-- ALTER TABLE todos
+-- ALTER COLUMN text TYPE TEXT;

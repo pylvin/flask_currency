@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Album example for Bootstrap</title>
+
+    <link rel="stylesheet" href="/{{ static }}/css/bootstrap.min.css">
+    <script src="/{{ static }}/jquery/jquery.min.js"></script>
+    <script src="/{{ static }}/js/popper.min.js"></script>
+    <script src="/{{ static }}/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">Todo Application</h4>
+                    <p class="text-muted"></p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                        <li><a href="#" class="text-white">Like on Facebook</a></li>
+                        <li><a href="#" class="text-white">Email me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <strong>Todo Application</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main role="main">
+
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <!-- Button to Open the Modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createtodo">
+                Create new Task
+            </button>
+            <hr>
+
+            <table class="table table-sm table-dark">
+                <thead>
+                <tr>
+                    <th scope="col"># id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Text</th>
+                    <th scope="col">Create Time</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for todo in todo_list %}
+                    <tr>
+                        <th scope="row">{{ todo.0 }}</th>
+                        <td>{{ todo.1 }}</td>
+                        <td>{{ todo.2|truncate(50) }}</td>
+                        <td>{{ todo.3 }}</td>
+                        <td>
+                            <button data-toggle="modal" data-target="#updatemodal" class="btn btn-success update-button"
+                                    data-id="{{ todo.0 }}">Update
+                            </button>
+                            <button class="btn btn-danger delete-button"
+                            data-id="{{ todo.0 }}">Delete
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Copyright</a>
+        </p>
+
+    </div>
+</footer>
+
+<!-- The Modal -->
+<div class="modal" id="createtodo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create new task</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="name" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Text:</label>
+                        <textarea name="text" class="form-control" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Yadda saxla</button>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="updatemodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update task</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" class="update_form">
+                    <div class="form-group todo-name">
+                        <label for="email">Name:</label>
+                        <input type="text" name="name" class="form-control" id="email">
+                    </div>
+                    <div class="form-group todo-text">
+                        <label for="pwd">Text:</label>
+                        <textarea name="text" class="form-control" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Yadda saxla</button>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="deletemodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update task</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>Silmek istediyinize eminsiniz ?</p>
+                <button type="submit" data-id="" class="btn btn-danger">Sil</button>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function (e) {
+        $(".update-button").click(function () {
+            var id = $(this).attr("data-id");
+            $.ajax({
+                url: `/todo/${id}/`,
+                method: "GET",
+                success: function (data) {
+                    $(".update_form").attr("action", `/todo/${id}/`);
+                    $(".todo-name input").val(data.name);
+                    $(".todo-text textarea").text(data.text);
+                }
+            })
+        });
+
+        $(".delete-button").click(function () {
+            var id = $(this).attr("data-id");
+            $.ajax({
+                url: `/todo/${id}/`,
+                method: "DELETE",
+                success: function (data) {
+                    window.location.href = '/';
+                }
+            })
+        });
+    });
+</script>
+
+</body>
+</html>
