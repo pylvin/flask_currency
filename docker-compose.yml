@@ -1,0 +1,22 @@
+
+version: "3"
+
+services:
+
+  memcached:
+    container_name: memcached_app
+    image: sameersbn/memcached:1.5.6-2
+    ports:
+      - "11211:11211"
+    restart: "always"
+
+  webapp:
+    container_name: flask_app
+    build: .
+    restart: "always"
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    environment:
+      - docker=true
