@@ -62,7 +62,7 @@ def define_currency(code):
 def all_currency():
     if client.get('all'):
         # print('FROM MEMCACHE')
-        return jsonify(client.get('all'),{'MEMCACHE'})
+        return jsonify(client.get('all'),{'MEMCACHE':True})
     else:
         client.set('all',currencies_data(),expire=20)
         # print('FROM API')
